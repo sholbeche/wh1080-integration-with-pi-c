@@ -9,6 +9,7 @@
 #include <time.h>
 #include <sched.h>
 #include <sqlite3.h>
+#include <syslog.h>
 
 #include "bcm2835.h"
 #include "rfm01.h"
@@ -373,7 +374,9 @@ void main_loop(void)
                 {
                     printf(".");
                     fflush(stdout);
-                }
+                } else {
+			syslog(LOG_INFO,"Insufficient 433Mhz capture");
+		}
             }
             timeout = 1;
 
